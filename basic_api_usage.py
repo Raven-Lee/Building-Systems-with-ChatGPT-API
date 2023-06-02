@@ -1,17 +1,9 @@
-import os 
+import os
 import openai
-import yaml
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv()) # 读取本地.env文件
 
-def read_yaml_file(filename):
-    with open(filename, 'r') as stream:
-        try:
-            data = yaml.safe_load(stream)
-            return data
-        except yaml.YAMLError as exc:
-            print(exc)
-
-data = read_yaml_file('config.yml')
-openai.api_key = data['openai_key']
+openai.api_key = os.environ['OPENAI_API_KEY']
 
 def get_completion(prompt, model="gpt-3.5-turbo"):
     messages = [{"role": "user", "content": prompt}]
@@ -86,15 +78,16 @@ messages2 =  [
  about a happy carrot"""},  
 ] 
 
-messages3 = [
-    {'role':'system',
-     'content':"""You are an assistant who responds \
-        in the style of Dr Seuss.""",
-    },
-    {'role':'user',
-     'content':"""write me a very short poem\
-        about a happy carrot"""},
-]
-response, token_dict = get_completion_and_token_count(messages3) 
-print(response)
-print(token_dict)
+# messages = [
+#     {'role':'system',
+#      'content':"""You are an assistant who responds \
+#         in the style of Dr Seuss.""",
+#     },
+#     {'role':'user',
+#      'content':"""write me a very short poem\
+#         about a happy carrot"""},
+# ]
+
+# response, token_dict = get_completion_and_token_count(messages) 
+# print(response)
+# print(token_dict)

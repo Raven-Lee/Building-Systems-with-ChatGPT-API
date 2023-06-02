@@ -87,3 +87,44 @@ in the list above, list any assumpotions that the \
 user is making in their \
 message e.g. that Laptop X is bigger than \
 Laptop Y, or that Laptop Z has a 2 year warranty.
+
+Step 4: {delimiter}: If the user made any assumptions,\
+figure out whether the assumption is true based on your \
+product infomation. 
+
+Step 5: {delimiter}: First, politely correct the \
+customer's incorrect assumptions if applicable. \
+Only mention or reference products in the list of \
+5 available products, as these are the only 5\
+products that the store sells. \
+Answer the customer in a friendly tone. 
+
+Use the following format:
+Step 1: {delimiter} <step 1 reasoning>
+Step 2: {delimiter} <step 2 reasoning>
+Step 3: {delimiter} <step 3 reasoning>
+Step 4: {delimiter} <step 4 reasoning>
+Response to user:{delimiter} <response to customer>
+
+Make sure to include {delimiter} to seperate every stap.
+"""
+
+user_message = f"""
+by how much is the BlueWave Chromebook more expensive \
+than the TechPro Desktop
+"""
+
+user_message2 = f"""
+what do you sell
+"""
+
+messages = [
+   {'role':'system',
+     'content':system_message},
+   {'role':'user',
+     'content':f"{delimiter}{user_message2}{delimiter}"},
+]
+
+response = get_completion_from_messages(messages)  
+print(response)
+
