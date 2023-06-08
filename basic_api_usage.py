@@ -48,46 +48,9 @@ def get_completion_and_token_count(messages,
 
     return content, token_dict
 
-# response = get_completion("What is the capital of France?")
-# print(response)
-
-# response = get_completion('Take the letters in lollipop\
-#                           and reverse them')
-# print(response)
-
-# response = get_completion("""Take the letters in \
-#     l-o-l-l-i-p-o-p and reverse them""")
-
-# print(response)
-
-messages =  [  
-{'role':'system', 
- 'content':"""You are an assistant who\
- responds in the style of Dr Seuss."""},    
-{'role':'user', 
- 'content':"""write me a very short poem\
- about a happy carrot"""},  
-] 
-
-messages2 =  [  
-{'role':'system', 
- 'content':"""All your resonses must be\
-    one sentnce long"""},    
-{'role':'user', 
- 'content':"""write me a very story \
- about a happy carrot"""},  
-] 
-
-# messages = [
-#     {'role':'system',
-#      'content':"""You are an assistant who responds \
-#         in the style of Dr Seuss.""",
-#     },
-#     {'role':'user',
-#      'content':"""write me a very short poem\
-#         about a happy carrot"""},
-# ]
-
-# response, token_dict = get_completion_and_token_count(messages) 
-# print(response)
-# print(token_dict)
+def moderation(messages):
+    # 分析用户输入是否和暴力/色情/仇恨相关
+    response = openai.Moderation.create(
+        input=messages
+    )
+    return response["results"][0]
